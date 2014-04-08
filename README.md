@@ -26,3 +26,11 @@ ligger i samma mapp på servern (har samma sökväg) så kommer det att fungera.
 
 Lägg till alla skärmstorlekar som ska testas mot i variabeln `screen_widths` som poster
 i en array med störst först och minst sist.
+
+###Hur gör man?
+
+1. Filen `application.js` är beroende av jQuery och skall laddas efter att jQuery laddats.
+2. Filen `responsive_art_direction.php` ska laddas i Wordpress i det aktiva temat och ändrar där bilder infogade i en artikel så att de stämmer överens med syntaxen för javascriptet.
+3. Ändra variabeln `screen_widths` i javascriptet till att inkludera alla brytpunkter för skärmstorlekar som bilderna ska kunna anpassas till.
+
+Lycka till!
