@@ -1,7 +1,7 @@
 Responsiv art direction
 =======================
 
-Dynamisk responsiv bildhantering via javascript.
+###Dynamisk responsiv bildhantering via javascript
 
 
 Funktion för att dynamiskt byta ut bilder på en sida så att de
