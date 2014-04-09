@@ -1,4 +1,8 @@
 <?php
+/*
+Lägg följande kod i functions.php eller gör en 
+require_once("responsive_art_direction.php");
+*/
 
 function responsive_art_direction(){
 	global $post;
