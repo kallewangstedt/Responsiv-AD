@@ -29,7 +29,7 @@ i en array med störst först och minst sist.
 
 ###Hur gör man?
 
-1. Filen `application.js` är beroende av jQuery och skall laddas efter att jQuery laddats.
+1. Filen `responsiveArtDirection.js` är beroende av jQuery och skall laddas efter att jQuery laddats.
 2. Filen `responsive_art_direction.php` ska laddas i Wordpress i det aktiva temat och ändrar där bilder infogade i en artikel så att de stämmer överens med syntaxen för javascriptet.
 3. Vid användning i WP läggs sökvägen till en laddningsbild `spinner.gif` i alla bilder så att den visas innan skriptet byter ut den mot den responsiva bilden.
 4. Ändra variabeln `screen_widths` i javascriptet till att inkludera alla brytpunkter för skärmstorlekar som bilderna ska kunna anpassas till.
