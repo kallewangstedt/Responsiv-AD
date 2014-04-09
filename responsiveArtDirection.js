@@ -2,7 +2,7 @@
 // anpassas till skärmstorleken. Alltså inte en traditionell omskalning,
 // utan gör det möjligt att ha helt olika bilder för olika skärmar.
 
-// Standardbilden anges i <img /> med attributet data-default-src och
+// Standardbilden anges i <img /> med attributet data-src-default och
 // namnet på den används sedan för att hämta de anpassade bilderna.
 
 // Övriga bilder ska ligga bredvid standardbilden och vara namngivna enligt följande:
@@ -42,6 +42,7 @@
 
 		// Byt alla bilder första gången
 		swapImages();
+
 	}
 
 
@@ -53,9 +54,9 @@
 				suffix = "@";
 			}
 		});
-		$("img[data-default-src]").each(function(i, obj){
+		$("img[data-src-default]").each(function(i, obj){
 			var $img	= $(obj),
-				src		= $img.attr("data-default-src"),
+				src		= $img.attr("data-src-default"),
 				ext		= src.substr(src.lastIndexOf('.')),
 				divider = (suffix.length > 1) ? "-" : "";
 
@@ -83,14 +84,13 @@
 						}, function(){
 							console.log("Ingen 1x bild funnen.");
 							console.log("Laddar standardbilden.");
-							$img.attr("src", $img.attr("data-default-src"));
+							$img.attr("src", $img.attr("data-src-default"));
 							$img.attr("width", "auto").attr("height", "auto");
 						});	
 					}
 				);
 			// Lågupplösta skärmar
 			} else {
-				console.log(suffix.length);
 				if(suffix.length == 1)
 					suffix = "";
 				fetchImage(src + suffix + ext, function(img){
@@ -100,7 +100,7 @@
 				}, function(){
 					console.log("Ingen 1x bild funnen.");
 					console.log("Laddar standardbilden.");
-					$img.attr("src", $img.attr("data-default-src"));
+					$img.attr("src", $img.attr("data-src-default"));
 					$img.attr("width", "auto").attr("height", "auto");
 				});	
 			}
