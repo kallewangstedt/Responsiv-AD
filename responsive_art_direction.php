@@ -12,6 +12,7 @@ function responsive_art_direction(){
 	$img = preg_replace('#(<img.+?)(src="[^"]*")(.*?/?>)#i', '$1data-default-$2 ' . $spinner . '$3', $post->post_content);
 	$img = preg_replace('#(<img(.*?))(width="[^"]*"){1}(.*?/?>)#i', '$1$4', $img);
 	$img = preg_replace('#(<img(.*?))(height="[^"]*"){1}(.*?/?>)#i', '$1$4', $img);
+	$img = preg_replace('#(<img(.*?))([ ]{2,}){1,}(.*?/?>)#i', '$1 $4', $img);
 	return $img;
 
 }
