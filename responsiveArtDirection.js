@@ -32,7 +32,7 @@
 // 1. Filen `responsiveArtDirection.js` är beroende av jQuery och skall laddas efter att jQuery laddats.
 // 2. Filen `responsive_art_direction.php` ska laddas i Wordpress i det aktiva temat och ändrar där bilder infogade i en artikel så att de stämmer överens med syntaxen för javascriptet.
 // 3. Vid användning i WP läggs sökvägen till en laddningsbild `spinner.gif` i alla bilder så att den visas innan skriptet byter ut den mot den responsiva bilden.
-// 4. Ändra variabeln `screen_widths` i javascriptet till att inkludera alla brytpunkter för skärmstorlekar som bilderna ska kunna anpassas till.
+// 4. Ändra variabeln `window.screen_widths` (i `global scope`) till att inkludera alla brytpunkter för skärmstorlekar som bilderna ska kunna anpassas till.
 
 // Lycka till!
 
@@ -42,7 +42,7 @@
 
 	var suffix			= "",
 		retina			= window.matchMedia("only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 2dppx)"),
-		screen_widths	= ["960","768","480","320"];
+		screen_widths	= window.screen_widths || ["960","768","480","320"];
 
 
 	responsiveArtDirection.run = function(){
