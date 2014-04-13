@@ -24,7 +24,7 @@ Används Wordpress och standardbilden skalas om vid uppladdning dit så tar skri
 hand om WP:s namngivning också. Så länge alla bilder är döpta enligt ovan och
 ligger i samma mapp på servern (har samma sökväg) så kommer det att fungera.
 
-Lägg till alla skärmstorlekar som ska testas mot i variabeln `screen_widths` som poster
+Lägg till alla skärmstorlekar som ska testas mot i variabeln `RAD_breakpoints` som poster
 i en array med störst först och minst sist.
 
 ###Hur gör man?
@@ -32,6 +32,6 @@ i en array med störst först och minst sist.
 1. Filen `responsiveArtDirection.js` är beroende av jQuery och skall laddas efter att jQuery laddats.
 2. Filen `responsive_art_direction.php` ska laddas i Wordpress i det aktiva temat och ändrar där bilder infogade i en artikel så att de stämmer överens med syntaxen för javascriptet.
 3. Vid användning i WP läggs sökvägen till en laddningsbild `spinner.gif` i alla bilder så att den visas innan skriptet byter ut den mot den responsiva bilden.
-4. Ändra variabeln `window.screen_widths` (i `global scope`) till att inkludera alla brytpunkter för skärmstorlekar som bilderna ska kunna anpassas till.
+4. Ändra variabeln `window.RAD_breakpoints` (i `global scope`) till att inkludera alla brytpunkter för skärmstorlekar som bilderna ska kunna anpassas till.
 
 Lycka till!

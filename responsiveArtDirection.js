@@ -1,5 +1,5 @@
-// Responsiv art direction
-// =======================
+// Responsiv AD
+// ============
 
 // ###Dynamisk responsiv bildhantering via javascript
 
@@ -24,7 +24,7 @@
 // hand om WP:s namngivning också. Så länge alla bilder är döpta enligt ovan och
 // ligger i samma mapp på servern (har samma sökväg) så kommer det att fungera.
 
-// Lägg till alla skärmstorlekar som ska testas mot i variabeln `screen_widths` som poster
+// Lägg till alla skärmstorlekar som ska testas mot i variabeln `RAD_breakpoints` som poster
 // i en array med störst först och minst sist.
 
 // ###Hur gör man?
@@ -32,7 +32,7 @@
 // 1. Filen `responsiveArtDirection.js` är beroende av jQuery och skall laddas efter att jQuery laddats.
 // 2. Filen `responsive_art_direction.php` ska laddas i Wordpress i det aktiva temat och ändrar där bilder infogade i en artikel så att de stämmer överens med syntaxen för javascriptet.
 // 3. Vid användning i WP läggs sökvägen till en laddningsbild `spinner.gif` i alla bilder så att den visas innan skriptet byter ut den mot den responsiva bilden.
-// 4. Ändra variabeln `window.screen_widths` (i `global scope`) till att inkludera alla brytpunkter för skärmstorlekar som bilderna ska kunna anpassas till.
+// 4. Ändra variabeln `window.RAD_breakpoints` (i `global scope`) till att inkludera alla brytpunkter för skärmstorlekar som bilderna ska kunna anpassas till.
 
 // Lycka till!
 
@@ -42,7 +42,7 @@
 
 	var suffix			= "",
 		retina			= window.matchMedia("only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 2dppx)"),
-		screen_widths	= window.screen_widths || ["960","768","480","320"];
+		RAD_breakpoints	= window.RAD_breakpoints || ["950","768","480","320"];
 
 
 	responsiveArtDirection.run = function(){
@@ -63,7 +63,7 @@
 
 	function swapImages(){
 		var size_match = [];
-		$.each(screen_widths, function(i, arr){
+		$.each(RAD_breakpoints, function(i, arr){
 			if(window.matchMedia("only screen and (max-width: " + arr + "px)").matches){
 				size_match.push("@" + arr);
 			}
