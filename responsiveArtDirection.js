@@ -62,16 +62,16 @@
 
 
 	function swapImages(){
+		var size_match = [];
 		$.each(screen_widths, function(i, arr){
 			if(window.matchMedia("only screen and (max-width: " + arr + "px)").matches){
-				suffix = "@" + arr;
-			} else {
-				suffix = "@";
+				size_match.push("@" + arr);
 			}
 		});
-		$("img[data-src-default]").each(function(i, obj){
+		suffix = (size_match[0]) ? size_match[size_match.length - 1] : "@";
+		$("img[data-default-src]").each(function(i, obj){
 			var $img	= $(obj),
-				src		= $img.attr("data-src-default"),
+				src		= $img.attr("data-default-src"),
 				ext		= src.substr(src.lastIndexOf('.')),
 				divider = (suffix.length > 1) ? "-" : "";
 
@@ -99,7 +99,7 @@
 						}, function(){
 							console.log("Ingen 1x bild funnen.");
 							console.log("Laddar standardbilden.");
-							$img.attr("src", $img.attr("data-src-default"));
+							$img.attr("src", $img.attr("data-default-src"));
 							$img.attr("width", "auto").attr("height", "auto");
 						});	
 					}
@@ -115,7 +115,7 @@
 				}, function(){
 					console.log("Ingen 1x bild funnen.");
 					console.log("Laddar standardbilden.");
-					$img.attr("src", $img.attr("data-src-default"));
+					$img.attr("src", $img.attr("data-default-src"));
 					$img.attr("width", "auto").attr("height", "auto");
 				});	
 			}
