@@ -72,12 +72,14 @@
 		$("img[data-default-src]").each(function(i, obj){
 			var $img	= $(obj),
 				src		= $img.attr("data-default-src"),
+				wp_src	= "",
 				ext		= src.substr(src.lastIndexOf('.')),
 				divider = (suffix.length > 1) ? "-" : "";
 
 			// Om bilden är suffixad av Wordpress i.o.m. omskalning vid uppladdning
 			// får vi ta hand om det också. (bild-100x200.png)
 			if(src.match(/[\-]{1}\d+[x]{1}\d+/) !== null){
+				wp_src = src;
 				src = src.substr(0, src.lastIndexOf("-"));
 			}
 			
@@ -108,16 +110,26 @@
 			} else {
 				if(suffix.length == 1)
 					suffix = "";
-				fetchImage(src + suffix + ext, function(img){
-					console.log("Laddar 1x bild.");
-					$img.attr("src", img.src);
-					$img.attr("width", "auto").attr("height", "auto");
-				}, function(){
-					console.log("Ingen 1x bild funnen.");
-					console.log("Laddar standardbilden.");
-					$img.attr("src", $img.attr("data-default-src"));
-					$img.attr("width", "auto").attr("height", "auto");
-				});	
+				if(wp_src && suffix == ""){
+					fetchImage(wp_src, function(img){
+						console.log("Laddar standardbilden.");
+						$img.attr("src", $img.attr("data-default-src"));
+						$img.attr("width", "auto").attr("height", "auto");
+					}, function(){
+						console.log("Ingen Standardbild");
+					});
+				} else {
+					fetchImage(src + suffix + ext, function(img){
+						console.log("Laddar 1x bild.");
+						$img.attr("src", img.src);
+						$img.attr("width", "auto").attr("height", "auto");
+					}, function(){
+						console.log("Ingen 1x bild funnen.");
+						console.log("Laddar standardbilden.");
+						$img.attr("src", $img.attr("data-default-src"));
+						$img.attr("width", "auto").attr("height", "auto");
+					});	
+				}
 			}
 		});
 	}
