@@ -46,6 +46,9 @@
 
 
 	responsiveArtDirection.run = function(){
+
+		// Byt alla bilder första gången
+		swapImages();
 		
 		// Byt bilder igen vid ändring av fönsterstorlek
 		// men vänta en halv sekund så att inte funktionen körs kontinuerligt
@@ -55,8 +58,11 @@
 			}, 500);
 		});
 
-		// Byt alla bilder första gången
-		swapImages();
+		// Gör det möjligt att köra bildväxlingen programmatiskt också
+		// via en händelselyssnare
+		$(window).on("responsive_art_direction", function(e){
+			swapImages();
+		});
 
 	}
 
