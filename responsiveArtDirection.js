@@ -42,7 +42,7 @@
 	"use strict";
 
 	var suffix			= "",
-		retina			= window.matchMedia("only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 2dppx)"),
+		retina			= (typeof window.matchMedia == "function") ? window.matchMedia("only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 2dppx)") : {"matches": false},
 		RAD_breakpoints	= window.RAD_breakpoints || ["950","768","480","320"];
 
 
