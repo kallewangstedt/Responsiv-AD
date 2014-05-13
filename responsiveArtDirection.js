@@ -42,6 +42,7 @@
 	"use strict";
 
 	var suffix			= "",
+		mm				= (typeof window.matchMedia == "function"),
 		retina			= (typeof window.matchMedia == "function") ? window.matchMedia("only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 2dppx)") : {"matches": false},
 		RAD_breakpoints	= window.RAD_breakpoints || ["950","768","480","320"];
 
@@ -71,7 +72,7 @@
 	function swapImages(){
 		var size_match = [];
 		$.each(RAD_breakpoints, function(i, arr){
-			if(window.matchMedia("only screen and (max-width: " + arr + "px)").matches){
+			if(mm && window.matchMedia("only screen and (max-width: " + arr + "px)").matches){
 				size_match.push("@" + arr);
 			}
 		});
