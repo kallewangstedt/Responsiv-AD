@@ -33,7 +33,6 @@
 // 2. Filen `responsive_art_direction.php` ska laddas i Wordpress i det aktiva temat och ändrar där bilder infogade i en artikel så att de stämmer överens med syntaxen för javascriptet.
 // 3. Vid användning i WP läggs sökvägen till en laddningsbild `spinner.gif` i alla bilder så att den visas innan skriptet byter ut den mot den responsiva bilden.
 // 4. Ändra variabeln `window.RAD_breakpoints` (i `global scope`) till att inkludera alla brytpunkter för skärmstorlekar som bilderna ska kunna anpassas till.
-// 5. Behöver man programmatiskt initiera en bildomladdning (om innehållet t ex laddas via AJAX) så lyssnar programmet på händelsen `responsive_art_direction`. Exempel: `$(window).trigger("responsive_art_direction")`.
 
 // Lycka till!
 
@@ -44,6 +43,8 @@
 	var suffix			= "",
 		mm				= (typeof window.matchMedia == "function"),
 		retina			= (typeof window.matchMedia == "function") ? window.matchMedia("only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 2dppx)") : {"matches": false},
+		st_width 		= 0,
+		st_height		= 0,
 		RAD_breakpoints	= window.RAD_breakpoints || ["950","768","480","320"];
 
 
@@ -78,11 +79,13 @@
 		});
 		suffix = (size_match[0]) ? size_match[size_match.length - 1] : "@";
 		$("img[data-default-src]").each(function(i, obj){
-			var $img	= $(obj),
-				src		= $img.attr("data-default-src"),
-				wp_src	= "",
-				ext		= src.substr(src.lastIndexOf('.')),
-				divider = (suffix.length > 1) ? "-" : "";
+			var $img		= $(obj),
+				src			= $img.attr("data-default-src"),
+				st_width	= $img.attr("data-default-width") || "auto",
+				st_height	= $img.attr("data-default-height") || "auto",
+				wp_src		= "",
+				ext			= src.substr(src.lastIndexOf('.')),
+				divider 	= (suffix.length > 1) ? "-" : "";
 
 			// Om bilden är suffixad av Wordpress i.o.m. omskalning vid uppladdning
 			// får vi ta hand om det också. (bild-100x200.png)
@@ -110,7 +113,7 @@
 							console.log("Ingen 1x bild funnen.");
 							console.log("Laddar standardbilden.");
 							$img.attr("src", $img.attr("data-default-src"));
-							$img.attr("width", "auto").attr("height", "auto");
+							$img.attr("width", st_width).attr("height", st_height);
 						});	
 					}
 				);
@@ -122,20 +125,20 @@
 					fetchImage(wp_src, function(img){
 						console.log("Laddar standardbilden.");
 						$img.attr("src", $img.attr("data-default-src"));
-						$img.attr("width", "auto").attr("height", "auto");
+						$img.attr("width", st_width).attr("height", st_height);
 					}, function(){
 						console.log("Ingen Standardbild");
 					});
 				} else {
 					fetchImage(src + suffix + ext, function(img){
-						console.log("Laddar 1x bild.");
+						console.log("Laddar 1x bild: " + src + suffix + ext);
 						$img.attr("src", img.src);
 						$img.attr("width", "auto").attr("height", "auto");
 					}, function(){
 						console.log("Ingen 1x bild funnen.");
 						console.log("Laddar standardbilden.");
 						$img.attr("src", $img.attr("data-default-src"));
-						$img.attr("width", "auto").attr("height", "auto");
+						$img.attr("width", st_width).attr("height", st_height);
 					});	
 				}
 			}
